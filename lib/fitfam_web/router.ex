@@ -1,12 +1,21 @@
 defmodule FitFamWeb.Router do
   use FitFamWeb, :router
 
+  alias FitFam.Guardian
+
   pipeline :api do
     plug :accepts, ["json"]
   end
 
+  pipeline :authenticated do
+    plug Guardian.AuthPipeline
+  end
+
   scope "/api", FitFamWeb do
     pipe_through :api
+
+    pipe_through :authenticated
+    resources "/users", UserController, except: [:new, :edit]
   end
 
   scope "/auth", FitFamWeb do

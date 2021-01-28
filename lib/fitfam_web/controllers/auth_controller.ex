@@ -16,14 +16,9 @@ defmodule FitFamWeb.AuthController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    case FitFam.Accounts.find_or_create(auth) do
-      {:ok, user} ->
-        conn
-        |> redirect(to: "/")
-
-      {:error, reason} ->
-        conn
-        |> redirect(to: "/")
+    with {:ok, user} <- FitFam.Accounts.create_user(auth),
+         {:ok, token, _claims} <- FitFam.Guardian.encode_and_sign(user) do
+      conn |> json(%{access_token: token})
     end
   end
 end

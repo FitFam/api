@@ -118,7 +118,7 @@ defmodule FitFam.Accounts do
   end
 
   defp get_user_for_email(email) do
-    IO.inspect(Repo.get_by(User, email: email) |> Repo.preload(:rooms))
+    IO.inspect(Repo.get_by(User, email: email))
   end
 
   # facebook does it this way

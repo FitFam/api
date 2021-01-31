@@ -1,7 +1,6 @@
 defmodule FitFamWeb.AuthController do
   use FitFamWeb, :controller
   plug Ueberauth
-
   alias Ueberauth.Strategy.Helpers
 
   def delete(conn, _params) do
@@ -16,7 +15,7 @@ defmodule FitFamWeb.AuthController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    with {:ok, user} <- FitFam.Accounts.create_user(auth),
+    with {:ok, %FitFam.Accounts.User{} = user} <- FitFam.Accounts.find_or_create(auth),
          {:ok, token, _claims} <- FitFam.Guardian.encode_and_sign(user) do
       conn |> json(%{access_token: token})
     end

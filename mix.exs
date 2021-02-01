@@ -45,7 +45,9 @@ defmodule FitFam.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:ueberauth, "~> 0.6"},
       {:ueberauth_facebook, "~> 0.8"},
-      {:guardian, "~> 2.0"}
+      {:guardian, "~> 2.0"},
+      {:absinthe, "~> 1.6.0"},
+      {:absinthe_plug, "~> 1.5.4"}
     ]
   end
 

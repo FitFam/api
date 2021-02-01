@@ -3,6 +3,10 @@ defmodule FitFamWeb.Router do
 
   alias FitFam.Guardian
 
+  pipeline :graphql do
+    # Will be used later
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -12,10 +16,7 @@ defmodule FitFamWeb.Router do
   end
 
   scope "/api", FitFamWeb do
-    pipe_through :api
-
-    pipe_through :authenticated
-    resources "/users", UserController, except: [:new, :edit]
+    pipe_through :graphql
   end
 
   scope "/auth", FitFamWeb do
@@ -25,6 +26,10 @@ defmodule FitFamWeb.Router do
     get("/facebook/callback", AuthController, :callback)
     post("/facebook/callback", AuthController, :callback)
     post("/logout", AuthController, :delete)
+  end
+
+  if Mix.env() == :dev do
+    forward "/graphiql", Absinthe.Plug.GraphiQL, schema: FitFamWeb.Schema
   end
 
   # Enables LiveDashboard only for development

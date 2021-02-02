@@ -4,19 +4,21 @@ defmodule FitFamWeb.Router do
   alias FitFam.Guardian
 
   pipeline :graphql do
-    # Will be used later
+    plug(FitFamWeb.Context)
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug(:accepts, ["json"])
   end
 
   pipeline :authenticated do
-    plug Guardian.AuthPipeline
+    plug(Guardian.AuthPipeline)
   end
 
-  scope "/api", FitFamWeb do
-    pipe_through :graphql
+  scope "/api" do
+    pipe_through(:graphql)
+
+    forward("/", Absinthe.Plug, schema: FitFamWeb.Schema)
   end
 
   scope "/auth", FitFamWeb do
@@ -29,7 +31,7 @@ defmodule FitFamWeb.Router do
   end
 
   if Mix.env() == :dev do
-    forward "/graphiql", Absinthe.Plug.GraphiQL, schema: FitFamWeb.Schema
+    forward("/graphiql", Absinthe.Plug.GraphiQL, schema: FitFamWeb.Schema)
   end
 
   # Enables LiveDashboard only for development
@@ -43,8 +45,8 @@ defmodule FitFamWeb.Router do
     import Phoenix.LiveDashboard.Router
 
     scope "/" do
-      pipe_through [:fetch_session, :protect_from_forgery]
-      live_dashboard "/dashboard", metrics: FitFamWeb.Telemetry
+      pipe_through([:fetch_session, :protect_from_forgery])
+      live_dashboard("/dashboard", metrics: FitFamWeb.Telemetry)
     end
   end
 end

@@ -10,9 +10,14 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :fitfam, FitFamWeb.Endpoint,
-  force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  load_from_system_env: true,
   url: [host: "api.fitfam.me", scheme: "https", port: 443],
+  secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE"),
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  server: true
   cache_static_manifest: "priv/static/cache_manifest.json"
+
+
 
 # Do not print debug messages in production
 config :logger, level: :info
@@ -54,3 +59,9 @@ config :logger, level: :info
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.
 import_config "prod.secret.exs"
+
+config :fitfam, FitFam.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  url: System.get_env("DATABASE_URL"),
+  ssl: true,
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")

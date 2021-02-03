@@ -11,7 +11,7 @@ use Mix.Config
 # before starting your production server.
 config :fitfam, FitFamWeb.Endpoint,
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
-  url: [host: "api.fitfam.me", port: 80],
+  url: [host: "api.fitfam.me", scheme: "https", port: 443],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production

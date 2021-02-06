@@ -20,7 +20,7 @@ defmodule FitFamWeb.AuthController do
       conn =
         conn
         |> put_resp_cookie("auth_token", token)
-        |> json(%{access_token: token})
+        |> redirect(external: System.get_env("WWW_URL"))
     end
   end
 end

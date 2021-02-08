@@ -5,9 +5,10 @@ defmodule FitFamWeb.Schema.UserTypes do
 
   @desc "A user"
   object :user do
-    field :id, :id
-    field :name, :string
-    field :email, :string
+    field(:id, :id)
+    field(:name, :string)
+    field(:email, :string)
+    field(:avatar, :string)
   end
 
   object :get_users do

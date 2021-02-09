@@ -7,5 +7,6 @@ defmodule FitFamWeb.Schema do
 
   query do
     import_fields(:get_users)
+    import_fields(:get_user)
   end
 end

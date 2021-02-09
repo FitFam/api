@@ -20,4 +20,16 @@ defmodule FitFamWeb.Schema.UserTypes do
       resolve(&Resolvers.Users.list_users/2)
     end
   end
+
+  object :get_user do
+    @desc """
+      Get a specific user
+    """
+
+    field :user, :user do
+      arg(:id, non_null(:id))
+
+      resolve(&Resolvers.Users.get_user/2)
+    end
+  end
 end

@@ -117,6 +117,10 @@ defmodule FitFam.Accounts do
     end
   end
 
+  def get_user_for_username(username) do
+    Repo.get_by(User, username: username)
+  end
+
   defp get_user_for_email(email) do
     IO.inspect(Repo.get_by(User, email: email))
   end

@@ -31,7 +31,12 @@ defmodule FitFamWeb.Router do
   end
 
   if Mix.env() == :dev do
-    forward("/graphiql", Absinthe.Plug.GraphiQL, schema: FitFamWeb.Schema)
+    scope "/graphiql" do
+      pipe_through(:graphql)
+
+      forward("/", Absinthe.Plug.GraphiQL, schema: FitFamWeb.Schema)
+    end
+
   end
 
   # Enables LiveDashboard only for development

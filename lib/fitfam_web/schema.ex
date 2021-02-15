@@ -9,4 +9,8 @@ defmodule FitFamWeb.Schema do
     import_fields(:get_users)
     import_fields(:get_user)
   end
+
+  mutation do
+    import_fields(:update_user)
+  end
 end

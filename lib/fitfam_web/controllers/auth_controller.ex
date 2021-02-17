@@ -19,7 +19,7 @@ defmodule FitFamWeb.AuthController do
          {:ok, token, _claims} <- FitFam.Guardian.encode_and_sign(user) do
       conn =
         conn
-        |> put_resp_cookie("auth_token", token, http_only: false)
+        |> put_resp_cookie("auth_token", token, http_only: false, domain: System.get_env("TOP_DOMAIN"))
         |> redirect(external: System.get_env("WWW_URL"))
     end
   end

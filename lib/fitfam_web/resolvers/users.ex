@@ -23,4 +23,10 @@ defmodule FitFamWeb.Resolvers.Users do
   end
 
   def update_user(_args, _context), do: {:error, "Not Authorized"}
+
+  def get_logged_in_user(_args, %{context: %{current_user: _user}}) do
+    {:ok, Accounts.get_user!(_user.id)}
+  end
+
+  def get_logged_in_user(_args, _context), do: {:error, "Not Authorized"}
 end

@@ -46,4 +46,14 @@ defmodule FitFamWeb.Schema.UserTypes do
       resolve(&Resolvers.Users.update_user/2)
     end
   end
+
+  object :get_logged_in_user do
+    @desc """
+    Get currently logged in user
+    """
+
+    field :get_logged_in_user, :user do
+      resolve(&Resolvers.Users.get_logged_in_user/2)
+    end
+  end
 end

@@ -8,6 +8,7 @@ defmodule FitFamWeb.Schema do
   query do
     import_fields(:get_users)
     import_fields(:get_user)
+    import_fields(:get_logged_in_user)
   end
 
   mutation do

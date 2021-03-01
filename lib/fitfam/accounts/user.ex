@@ -19,5 +19,6 @@ defmodule FitFam.Accounts.User do
     user
     |> cast(attrs, [:email, :uid, :name, :avatar, :username])
     |> validate_required([:email, :uid, :name, :avatar])
+    |> unique_constraint([:email, :username])
   end
 end

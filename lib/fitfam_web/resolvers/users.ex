@@ -9,8 +9,8 @@ defmodule FitFamWeb.Resolvers.Users do
     {:ok, Accounts.get_user_for_username(username)}
   end
 
-  def update_user(%{id: id} = params, %{context: %{current_user: _user}}) do
-    case Accounts.get_user!(id) do
+  def update_user(params, %{context: %{current_user: _user}}) do
+    case Accounts.get_user!(_user.id) do
       nil ->
       {:error, "User not found"}
 

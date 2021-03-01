@@ -40,7 +40,6 @@ defmodule FitFamWeb.Schema.UserTypes do
     """
 
     field :update_user, :user do
-      arg(:id, non_null(:id))
       arg(:username, :string)
 
       resolve(&Resolvers.Users.update_user/2)

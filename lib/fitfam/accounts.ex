@@ -138,6 +138,7 @@ defmodule FitFam.Accounts do
   end
 
   defp basic_info(auth) do
+    IO.inspect(auth)
     email = email_from_auth(auth)
 
     case auth.strategy do
@@ -148,15 +149,6 @@ defmodule FitFam.Accounts do
           email: email,
           avatar: avatar_from_auth(auth),
           provider: "facebook"
-        }
-
-      Ueberauth.Strategy.Google ->
-        %{
-          uid: auth.uid,
-          name: name_from_auth(auth),
-          email: email,
-          avatar: avatar_from_auth(auth),
-          provider: "google"
         }
     end
   end
@@ -175,5 +167,9 @@ defmodule FitFam.Accounts do
         Enum.join(name, " ")
       end
     end
+  end
+
+  defp random_username(name) do
+
   end
 end

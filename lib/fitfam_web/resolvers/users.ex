@@ -9,6 +9,10 @@ defmodule FitFamWeb.Resolvers.Users do
     {:ok, Accounts.get_user_for_username(username)}
   end
 
+  def create_user(_parent, args, _context) do
+    Accounts.create_user(args)
+  end
+
   def update_user(params, %{context: %{current_user: _user}}) do
     case Accounts.get_user!(_user.id) do
       nil ->

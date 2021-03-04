@@ -48,7 +48,8 @@ defmodule FitFam.MixProject do
       {:guardian, "~> 2.0"},
       {:absinthe, "~> 1.6.0"},
       {:absinthe_plug, "~> 1.5.4"},
-      {:cors_plug, "~> 2.0"}
+      {:cors_plug, "~> 2.0"},
+      {:bcrypt_elixir, "~> 2.3"}
     ]
   end
 

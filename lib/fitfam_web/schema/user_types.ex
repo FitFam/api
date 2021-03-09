@@ -12,6 +12,12 @@ defmodule FitFamWeb.Schema.UserTypes do
     field :username, :string
   end
 
+  @desc "session value"
+  object :session do
+    field(:auth_token, :string)
+    field(:user, :user)
+  end
+
   object :get_users do
     @desc """
     Get a list of users
@@ -62,7 +68,7 @@ defmodule FitFamWeb.Schema.UserTypes do
     """
 
     @desc "Create a user"
-    field :create_user, :user do
+    field :create_user, :session do
       arg(:email, non_null(:string))
       arg(:name, non_null(:string))
       arg(:username, non_null(:string))

@@ -22,6 +22,8 @@ defmodule FitFam.Accounts.User do
     user
     |> cast(attrs, [:email, :uid, :name, :avatar, :username, :password])
     |> validate_required([:email, :name, :username, :password])
+    |> validate_format(:email, ~r/@/) # Check that email is valid
+    |> validate_length(:password, min: 8) # Check that password length is >= 8
     |> unique_constraint([:email, :username])
     |> put_password_hash()
   end

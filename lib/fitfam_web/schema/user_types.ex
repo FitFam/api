@@ -18,6 +18,18 @@ defmodule FitFamWeb.Schema.UserTypes do
     field(:user, :user)
   end
 
+  object :login do
+    @desc """
+      Login with username and password
+    """
+
+    field :login, :session do
+      arg(:email, non_null(:string))
+      arg(:password, non_null(:string))
+      resolve(&Resolvers.Users.login/2)
+    end
+  end
+
   object :get_users do
     @desc """
     Get a list of users

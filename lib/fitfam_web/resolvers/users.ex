@@ -37,4 +37,13 @@ defmodule FitFamWeb.Resolvers.Users do
   end
 
   def get_logged_in_user(_args, _context), do: {:error, "Not Authorized"}
+
+  def login(%{email: email, password: password}, _info) do
+    with %Accounts.User{} = user <- Accounts.get_user_by_email_and_password(email, password),
+    {:ok, jwt, _full_claims} <- Guardian.encode_and_sign(user) do
+      {:ok, %{auth_token: jwt, user: user}}
+    else
+      _ -> {:error, "Incorrect email or password"}
+    end
+  end
 end

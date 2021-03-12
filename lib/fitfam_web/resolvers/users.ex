@@ -40,9 +40,10 @@ defmodule FitFamWeb.Resolvers.Users do
 
   def login(%{email: email, password: password}, _info) do
     with %Accounts.User{} = user <- Accounts.get_user_by_email_and_password(email, password),
-    {:ok, jwt, _full_claims} <- Guardian.encode_and_sign(user) do
-      {:ok, %{auth_token: jwt, user: user}}
+    {:ok, token, full_claims} <- Guardian.encode_and_sign(user) do
+      {:ok, %{auth_token: token, user: user}}
     else
+      {:error, error_reason} -> {:error, error_reason}
       _ -> {:error, "Incorrect email or password"}
     end
   end

@@ -38,7 +38,7 @@ defmodule FitFam.Accounts.User do
 
   def valid_password?(%FitFam.Accounts.User{password_hash: password_hash}, password)
     when is_binary(password_hash) and byte_size(password) > 0 do
-    Bcrypt.verify_pass(password, password_hash)
+      Bcrypt.verify_pass(password, password_hash)
   end
 
   def valid_password?(_, _) do

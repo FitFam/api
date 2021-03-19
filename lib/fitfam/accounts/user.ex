@@ -12,6 +12,7 @@ defmodule FitFam.Accounts.User do
     field :uid, :string
     field :password, :string, virtual: true
     field :password_hash, :string
+    field :bio, :string
 
 
     timestamps()
@@ -20,13 +21,21 @@ defmodule FitFam.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :uid, :name, :avatar, :username, :password])
+    |> cast(attrs, [:email, :uid, :name, :avatar, :username, :password, :bio])
     |> validate_required([:email, :name, :username, :password])
     |> validate_format(:email, ~r/@/) # Check that email is valid
     |> validate_length(:password, min: 8) # Check that password length is >= 8
     |> unique_constraint([:email, :username])
     |> put_password_hash()
   end
+
+  def update_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:name, :avatar, :username, :bio])
+    |> validate_required([:username])
+    |> unique_constraint([:username])
+  end
+
 
   defp put_password_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
     change(changeset, Bcrypt.add_hash(password))

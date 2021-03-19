@@ -10,6 +10,7 @@ defmodule FitFamWeb.Schema.UserTypes do
     field :email, :string
     field :avatar, :string
     field :username, :string
+    field :bio, :string
   end
 
   @desc "session value"
@@ -59,6 +60,7 @@ defmodule FitFamWeb.Schema.UserTypes do
 
     field :update_user, :user do
       arg(:username, :string)
+      arg(:bio, :string)
 
       resolve(&Resolvers.Users.update_user/2)
     end

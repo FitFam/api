@@ -13,6 +13,7 @@ defmodule FitFam.Accounts.User do
     field :password, :string, virtual: true
     field :password_hash, :string
     field :bio, :string
+    field :instagram, :string
 
 
     timestamps()
@@ -31,7 +32,7 @@ defmodule FitFam.Accounts.User do
 
   def update_changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :avatar, :username, :bio])
+    |> cast(attrs, [:name, :avatar, :username, :instagram, :bio])
     |> validate_required([:username])
     |> unique_constraint([:username])
   end

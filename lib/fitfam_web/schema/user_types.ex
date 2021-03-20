@@ -10,6 +10,7 @@ defmodule FitFamWeb.Schema.UserTypes do
     field :email, :string
     field :avatar, :string
     field :username, :string
+    field :instagram, :string
     field :bio, :string
   end
 
@@ -61,6 +62,7 @@ defmodule FitFamWeb.Schema.UserTypes do
     field :update_user, :user do
       arg(:username, :string)
       arg(:bio, :string)
+      arg(:instagram, :string)
 
       resolve(&Resolvers.Users.update_user/2)
     end

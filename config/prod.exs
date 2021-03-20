@@ -14,7 +14,7 @@ config :fitfam, FitFamWeb.Endpoint,
   url: [host: "api.fitfam.me", scheme: "https", port: 443],
   secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE"),
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
-  server: true,
+  server: true
   #cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production

@@ -15,7 +15,7 @@ config :fitfam, FitFamWeb.Endpoint,
   secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE"),
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   server: true,
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  #cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
 config :logger, level: :info

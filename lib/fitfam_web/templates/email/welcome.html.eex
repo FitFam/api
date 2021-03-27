@@ -1,0 +1,7 @@
+<div>
+  <img style="max-width: 600px" src="<%= Routes.static_url(FitFamWeb.Endpoint, "/images/fitfam-cover@2x.png") %>" alt="FitFam Cover Image" />
+  <h1>Hi <%= @name %> 💪</h2>
+  <p>Thanks for signing up for FitFam! Your username is <b><%= @username %></b>.</p>
+  <p>Please click the link below to verify your email address</p>
+  <div><a href="https://fitfam.me/verify_email/<%= @token %>">Verify email address</a></div>
+</div>

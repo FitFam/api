@@ -29,3 +29,5 @@ fitfam-*.tar
 
 # Environment Variables
 /.env
+
+.DS_Store

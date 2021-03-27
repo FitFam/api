@@ -1,6 +1,8 @@
 defmodule FitFamWeb.Resolvers.Users do
   alias FitFam.Accounts
   alias FitFam.Guardian
+  alias FitFam.UserEmail
+  alias FitFam.Mailer
 
   def list_users(_args, _context) do
     {:ok, Accounts.list_users()}
@@ -13,6 +15,7 @@ defmodule FitFamWeb.Resolvers.Users do
   def create_user(_parent, args, _context) do
     with {:ok, %Accounts.User{} = user} <- Accounts.create_user(args),
          {:ok, token, _claims} <- Guardian.encode_and_sign(user) do
+          UserEmail.welcome(user) |> Mailer.deliver
       {:ok, %{auth_token: token, user: user}}
     end
   end

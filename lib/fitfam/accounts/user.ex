@@ -14,6 +14,7 @@ defmodule FitFam.Accounts.User do
     field :password_hash, :string
     field :bio, :string
     field :instagram, :string
+    field :token, :string
 
 
     timestamps()
@@ -28,6 +29,7 @@ defmodule FitFam.Accounts.User do
     |> validate_length(:password, min: 8) # Check that password length is >= 8
     |> unique_constraint([:email, :username])
     |> put_password_hash()
+    |> put_token()
   end
 
   def update_changeset(user, attrs) do
@@ -55,4 +57,13 @@ defmodule FitFam.Accounts.User do
     Bcrypt.no_user_verify()
     false
   end
+
+  defp put_token(changeset) do
+		case changeset do
+			%Ecto.Changeset{valid?: true} ->
+				put_change(changeset, :token, SecureRandom.urlsafe_base64())
+			_ ->
+				changeset
+		end
+	end
 end

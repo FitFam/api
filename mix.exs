@@ -49,7 +49,10 @@ defmodule FitFam.MixProject do
       {:absinthe, "~> 1.6.0"},
       {:absinthe_plug, "~> 1.5.4"},
       {:cors_plug, "~> 2.0"},
-      {:bcrypt_elixir, "~> 2.3"}
+      {:bcrypt_elixir, "~> 2.3"},
+      {:swoosh, "~> 1.0"},
+      {:phoenix_swoosh, "~> 0.3"},
+      {:secure_random, "~> 0.5"}
     ]
   end
 

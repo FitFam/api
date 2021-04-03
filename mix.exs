@@ -52,7 +52,8 @@ defmodule FitFam.MixProject do
       {:bcrypt_elixir, "~> 2.3"},
       {:swoosh, "~> 1.0"},
       {:phoenix_swoosh, "~> 0.3"},
-      {:secure_random, "~> 0.5"}
+      {:secure_random, "~> 0.5"},
+      {:httpoison, "~> 1.8"}
     ]
   end
 
